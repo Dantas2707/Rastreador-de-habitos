@@ -14,4 +14,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
     Route::get('/dashboard', [HabitController::class, 'index'])->name('habits.index');
     Route::post('/habits/{habit}/toggle', [HabitController::class, 'toggleHabit'])->name('habits.toggle');
+    Route::get('/habits/create', [HabitController::class, 'create'])->name('habits.create');
+    Route::post('/habits', [HabitController::class, 'store'])->name('habits.store');
 });

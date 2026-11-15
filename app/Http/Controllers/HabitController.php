@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Http\Requests\HabitRequest;
 
 class HabitController extends Controller
 {
@@ -43,5 +44,19 @@ class HabitController extends Controller
         }
 
         return redirect()->route('habits.index');
+    }
+
+    public function create(): View
+    {
+        return view('habits.create');
+    }
+
+    public function store(HabitRequest $request): RedirectResponse
+    {
+        Auth::user()->habits()->create($request->validated());
+
+        return redirect()
+            ->route('habits.index')
+            ->with('success', 'Hábito criado com sucesso!');
     }
 }

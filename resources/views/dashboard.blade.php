@@ -1,8 +1,19 @@
 <x-layout>
     <div class="py-8">
-        <h1 class="font-bold text-2xl mb-4">
-            Olá, {{ auth()->user()->name }}! Seus Hábitos de Hoje:
-        </h1>
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="font-bold text-2xl">
+                Olá, {{ auth()->user()->name }}! Seus Hábitos de Hoje:
+            </h1>
+            <a href="{{ route('habits.create') }}" class="bg-[#FF521B] text-white px-4 py-2 habit-btn habit-shadow-lg">
+                + Novo Hábito
+            </a>
+        </div>
+
+        @if(session('success'))
+            <div class="bg-green-100 border-2 border-green-600 text-green-800 p-3 mb-4 font-bold">
+                {{ session('success') }}
+            </div>
+        @endif
 
         <ul class="flex flex-col gap-3">
             @forelse($habits as $habit)
